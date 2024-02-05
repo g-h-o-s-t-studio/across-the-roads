@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvl48v27nvd86"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_hi2j0"]
+[ext_resource type="PackedScene" uid="uid://dkuwmsoohwdlm" path="res://character.fbx" id="2_fk0gf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_elaco"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_hi2j0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_elaco")
+
+[node name="Root Scene" parent="." instance=ExtResource("2_fk0gf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0813782, 0, -0.0900367)
