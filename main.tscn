@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cec7tspm3fdrq"]
+[gd_scene load_steps=5 format=3 uid="uid://cec7tspm3fdrq"]
 
 [ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Player.tscn" id="1_fqh7r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s6j48"]
-size = Vector3(5, 0, 60)
+size = Vector3(30, 0, 60)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xf748"]
-size = Vector2(5, 60)
+size = Vector2(20, 60)
+
+[sub_resource type="Environment" id="Environment_rdvni"]
 
 [node name="Main" type="Node"]
 
@@ -22,3 +24,6 @@ mesh = SubResource("PlaneMesh_xf748")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.411546, 0.911389, 0, -0.911389, 0.411546, 0, 7.92292, 26.4063)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rdvni")
