@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmvnsd101jt1j"
-path.s3tc="res://.godot/imported/charater_1_character_texture.png-8d611750af173377fd8dc677ec320201.s3tc.ctex"
+uid="uid://c3duhfb2xij33"
+path.s3tc="res://.godot/imported/charater_1_character_texture.png-2cb0853fb126619a86b6c3981cfce27e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://charater_1_character_texture.png"
-dest_files=["res://.godot/imported/charater_1_character_texture.png-8d611750af173377fd8dc677ec320201.s3tc.ctex"]
+source_file="res://Models/Characters/charater_1_character_texture.png"
+dest_files=["res://.godot/imported/charater_1_character_texture.png-2cb0853fb126619a86b6c3981cfce27e.s3tc.ctex"]
 
 [params]
 

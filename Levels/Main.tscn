@@ -1,16 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://cec7tspm3fdrq"]
 
-[ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Player.tscn" id="1_fqh7r"]
+[ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Levels/Player.tscn" id="1_nf7dx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s6j48"]
-size = Vector3(30, 0, 60)
+size = Vector3(60, 0, 30)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xf748"]
-size = Vector2(20, 60)
+size = Vector2(60, 30)
 
 [sub_resource type="Environment" id="Environment_rdvni"]
 
 [node name="Main" type="Node"]
+
+[node name="ObstaclesZone" type="Node3D" parent="."]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -20,7 +22,8 @@ shape = SubResource("BoxShape3D_s6j48")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("PlaneMesh_xf748")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_fqh7r")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_nf7dx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.411546, 0.911389, 0, -0.911389, 0.411546, 0, 7.92292, 26.4063)

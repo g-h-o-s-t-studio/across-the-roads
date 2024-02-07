@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dh1bb3th24xv"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_4rpfs"]
-[ext_resource type="PackedScene" uid="uid://ddybcft6ywi5w" path="res://charater_1.glb" id="2_77ssk"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4rpfs"]
+[ext_resource type="PackedScene" uid="uid://ddybcft6ywi5w" path="res://Models/Characters/charater_1.glb" id="2_4wb72"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytx2b"]
 
@@ -14,10 +14,8 @@ shape = SubResource("CapsuleShape3D_ytx2b")
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="charater_1" parent="Pivot" instance=ExtResource("2_77ssk")]
+[node name="charater_1" parent="Pivot" instance=ExtResource("2_4wb72")]
 transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, 0, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.952661, 0.304033, 0, -0.304033, 0.952661, 0, 3.24008, 3.28559)
+transform = Transform3D(1, 0, 0, 0, 0.952662, 0.304033, 0, -0.304033, 0.952662, 0, 13.6313, 25.3516)
