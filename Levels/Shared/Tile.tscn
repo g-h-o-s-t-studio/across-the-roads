@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6vwsgk1hliex"]
 
-[ext_resource type="Script" path="res://Scripts/Piece.gd" id="1_nx7ui"]
+[ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_i43d3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehb72"]
 
@@ -11,12 +11,14 @@ size = Vector2(20, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_w1t44"]
 size = Vector3(20, 0, 20)
 
-[node name="Piece" type="StaticBody3D"]
-script = ExtResource("1_nx7ui")
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_i43d3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Tile" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
 mesh = SubResource("PlaneMesh_77md0")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
 shape = SubResource("BoxShape3D_w1t44")
