@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-const SPEED: float = 7.0
-const JUMP_VELOCITY: float = 4.5
+const JUMP_VELOCITY: float = 6.0
+var player_speed: float = 7.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -16,7 +17,8 @@ func _physics_process(delta: float) -> void:
 		direction.z -= 1
 	if Input.is_action_pressed("ui_right"):
 		direction.z += 1
-	
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+
+	# player_speed += 0.01
+	velocity.x = direction.x * player_speed
+	velocity.z = direction.z * player_speed
 	move_and_slide()

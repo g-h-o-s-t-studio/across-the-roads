@@ -1,10 +1,11 @@
 extends Node
-
+# TODO: add some mechanics(run on wall, changing lvl axis, etc)
+const KILL_ZONE: int = -50
 const MAP_SIZE: int = 5
 const TILE_SIZE: int = 50
 const TILE_SCENE: PackedScene = preload("res://Levels/Shared/Tile.tscn")
 var number_tiles: int = 1
-var tiles: Array[Object] = []
+var tiles: Array[Node3D] = []
 
 
 func _ready() -> void:
@@ -16,6 +17,9 @@ func _process(_delta: float) -> void:
 	if $Player.position.x > tiles[0].position.x + TILE_SIZE:
 		despawn_tile()
 		spawn_tile()
+	
+	if $Player.position.y <= KILL_ZONE:
+		get_tree().reload_current_scene()
 
 
 func spawn_tile() -> void:

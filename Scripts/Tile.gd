@@ -4,20 +4,23 @@ const OBSTACLES: Array[PackedScene] = [
 	preload("res://Levels/Obstacles/Square1.tscn"), 
 	preload("res://Levels/Obstacles/Rectangle1.tscn"),
 ]
-const OBSTACLE_SPEED: int = 5
-const MIN_AMOUNT_OBS: int = 10
-const MAX_AMOUNT_OBS: int = 25
-const MAX_OBSTACLE_POSITION: int = 30
+const MAX_OBS_POSITION: int = 30
+@export var min_amount_obs: int = 10
+@export var max_amount_obs: int = 25
+@export var min_obs_speed: int = 5
+@export var max_obs_speed: int = 15
 @onready var mesh: PlaneMesh = $Tile/Mesh.mesh
 @onready var right_to_left: Node = Node.new()
 @onready var left_to_right: Node = Node.new()
 @onready var raycast: RayCast3D = $RayCast
+var obstacles_speed: Dictionary = {}
+
 
 
 func _ready() -> void:
 	add_child(right_to_left)
 	add_child(left_to_right)
-	spawn_obstacles(randi_range(MIN_AMOUNT_OBS, MAX_AMOUNT_OBS))
+	spawn_obstacles(randi_range(min_amount_obs, max_amount_obs))
 
 
 func get_spawn_vector() -> Vector3:
@@ -38,8 +41,8 @@ func get_spawn_position() -> Vector3:
 
 
 func spawn_obstacles(number_obstacles: int) -> void:
-	for i in range(number_obstacles):
-		var obs: Object = OBSTACLES[randi() % OBSTACLES.size() - 1].instantiate()
+	for i: int in range(number_obstacles):
+		var obs: StaticBody3D = OBSTACLES[randi() % OBSTACLES.size() - 1].instantiate()
 		
 		if randi() % 2 == 0:
 			obs.position = get_spawn_position()
@@ -47,11 +50,13 @@ func spawn_obstacles(number_obstacles: int) -> void:
 		else:
 			obs.position = get_spawn_position()
 			left_to_right.add_child(obs)
+		
+		obstacles_speed[obs] = randf_range(5, 15)
 
 
 func move_obstacle(obstacle: StaticBody3D, new_position: float) -> void:
 	obstacle.position.z += new_position
-	if abs(obstacle.position.z) >= MAX_OBSTACLE_POSITION:
+	if abs(obstacle.position.z) >= MAX_OBS_POSITION:
 		if obstacle.get_parent() == right_to_left:
 			right_to_left.remove_child(obstacle)
 			left_to_right.add_child(obstacle)
@@ -62,7 +67,7 @@ func move_obstacle(obstacle: StaticBody3D, new_position: float) -> void:
 
 func _process(delta: float) -> void:
 	for obs in right_to_left.get_children():
-		move_obstacle(obs, OBSTACLE_SPEED * delta)
+		move_obstacle(obs, obstacles_speed[obs] * delta)
 		
 	for obs in left_to_right.get_children():
-		move_obstacle(obs, -OBSTACLE_SPEED * delta)
+		move_obstacle(obs, -obstacles_speed[obs] * delta)
