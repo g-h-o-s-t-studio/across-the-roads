@@ -16,12 +16,12 @@ script = ExtResource("1_i43d3")
 
 [node name="Tile" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
+[node name="Mesh" type="MeshInstance3D" parent="Tile"]
 mesh = SubResource("PlaneMesh_77md0")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
+[node name="Collision" type="CollisionShape3D" parent="Tile"]
 shape = SubResource("BoxShape3D_w1t44")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)

@@ -18,4 +18,4 @@ shape = SubResource("CapsuleShape3D_ytx2b")
 transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.952662, 0.304033, 0, -0.304033, 0.952662, 0, 30.9486, 94.7619)
+transform = Transform3D(1, 0, 0, 0, 0.952662, 0.304033, 0, -0.304033, 0.952662, 0, 3.144, 2.44)
