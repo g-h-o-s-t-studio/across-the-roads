@@ -18,7 +18,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"):
 		direction.z += 1
 
-	# player_speed += 0.01
 	velocity.x = direction.x * player_speed
 	velocity.z = direction.z * player_speed
 	move_and_slide()
+
+#
+#func _on_area_3d_body_entered(body):
+	#print(body)
+	#var a = body as SquareObstacle
+	#print(a)
+	#if a is SquareObstacle:
+		#queue_free()

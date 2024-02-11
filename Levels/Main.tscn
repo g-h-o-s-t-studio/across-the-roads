@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cec7tspm3fdrq"]
+[gd_scene load_steps=8 format=3 uid="uid://cec7tspm3fdrq"]
 
 [ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Levels/Player.tscn" id="1_nf7dx"]
-[ext_resource type="Script" path="res://Levels/GameController.gd" id="1_ucyh3"]
-
-[sub_resource type="Environment" id="Environment_rdvni"]
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_udkti"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bd5u8"]
 size = Vector3(50, 0, 20)
@@ -11,17 +9,31 @@ size = Vector3(50, 0, 20)
 [sub_resource type="PlaneMesh" id="PlaneMesh_oirqd"]
 size = Vector2(50, 20)
 
-[node name="Main" type="Node"]
-script = ExtResource("1_ucyh3")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qpdtu"]
+sky_top_color = Color(0.384314, 0.466667, 0.47451, 1)
+sky_horizon_color = Color(0.541176, 0.517647, 0.329412, 1)
+ground_bottom_color = Color(0.180392, 0.172549, 0.172549, 1)
+ground_horizon_color = Color(0.541176, 0.517647, 0.329412, 1)
+
+[sub_resource type="Sky" id="Sky_3nvne"]
+sky_material = SubResource("ProceduralSkyMaterial_qpdtu")
+
+[sub_resource type="Environment" id="Environment_rdvni"]
+background_mode = 2
+sky = SubResource("Sky_3nvne")
+ambient_light_source = 3
+reflected_light_source = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_sun_scatter = 0.01
+fog_aerial_perspective = 0.8
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_udkti")
 
 [node name="Player" parent="." instance=ExtResource("1_nf7dx")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.411546, 0.911389, 0, -0.911389, 0.411546, 0, 7.92292, 26.4063)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_rdvni")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -30,3 +42,11 @@ shape = SubResource("BoxShape3D_bd5u8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("PlaneMesh_oirqd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5, -0.663414, 0.55667, 0, 0.642788, 0.766044, -0.866025, 0.383022, -0.321394, 0, 5, 0)
+shadow_enabled = true
+shadow_blur = 1.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rdvni")

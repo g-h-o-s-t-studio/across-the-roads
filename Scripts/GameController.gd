@@ -1,15 +1,15 @@
-extends Node
-# TODO: add some mechanics(run on wall, changing lvl axis, etc)
+extends Node3D
+
 const KILL_ZONE: int = -50
 const MAP_SIZE: int = 5
 const TILE_SIZE: int = 50
 const TILE_SCENE: PackedScene = preload("res://Levels/Shared/Tile.tscn")
 var number_tiles: int = 1
 var tiles: Array[Node3D] = []
-
+# TODO: ADD SCORE
 
 func _ready() -> void:
-	for i in range(MAP_SIZE):
+	for i: int in range(MAP_SIZE):
 		spawn_tile()
 
 
