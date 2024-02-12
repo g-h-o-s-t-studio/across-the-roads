@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6vwsgk1hliex"]
+
+[ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_m808o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0rdeq"]
+size = Vector3(20, 2, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrngd"]
+size = Vector3(20, 2, 50)
+
+[node name="Tile" type="Node3D"]
+script = ExtResource("1_m808o")
+min_obstacles = null
+max_obstacles = null
+
+[node name="Tile" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Tile"]
+mesh = SubResource("BoxMesh_0rdeq")
+skeleton = NodePath("")
+
+[node name="Collision" type="CollisionShape3D" parent="Tile"]
+shape = SubResource("BoxShape3D_vrngd")
+
+[node name="RayCast" type="RayCast3D" parent="."]
+target_position = Vector3(-60, 0, 0)

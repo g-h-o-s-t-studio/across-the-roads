@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh1bb3th24xv"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4rpfs"]
+[ext_resource type="PackedScene" uid="uid://ddybcft6ywi5w" path="res://Models/Characters/Default/charater_1.glb" id="2_4wb72"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytx2b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58ca2"]
+size = Vector3(1, 2, 0)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4rpfs")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ytx2b")
+
+[node name="charater_1" parent="." instance=ExtResource("2_4wb72")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -2.55599e-08, 8.36028e-08, 0, 0.956305, 0.292372, -8.74228e-08, 0.292372, -0.956305, 0, 3, -5)
+far = 400.0
+
+[node name="Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+
+[node name="AreaCollision" type="CollisionShape3D" parent="Area"]
+shape = SubResource("BoxShape3D_58ca2")
+
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]

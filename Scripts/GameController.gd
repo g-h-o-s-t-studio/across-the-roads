@@ -1,12 +1,14 @@
 extends Node3D
 
+# TODO: add some mechanics(run on wall, changing lvl axis, etc)
 const KILL_ZONE: int = -50
-const MAP_SIZE: int = 5
-const TILE_SIZE: int = 50
-const TILE_SCENE: PackedScene = preload("res://Levels/Shared/Tile.tscn")
-var number_tiles: int = 1
+const MAP_SIZE: int = 8
+const TILE_SIZE: float = 50
+const TILE_SCENE: PackedScene = preload("res://Levels/Tiles/Tile.tscn")
+
+var number_tiles: int = 0
 var tiles: Array[Node3D] = []
-# TODO: ADD SCORE
+
 
 func _ready() -> void:
 	for i: int in range(MAP_SIZE):
@@ -14,7 +16,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if $Player.position.x > tiles[0].position.x + TILE_SIZE:
+	if $Player.position.z > tiles[0].position.z + TILE_SIZE / 2:
 		despawn_tile()
 		spawn_tile()
 	
@@ -23,11 +25,11 @@ func _process(_delta: float) -> void:
 
 
 func spawn_tile() -> void:
-	var new_tile: Node3D = TILE_SCENE.instantiate()
-	new_tile.position = Vector3(number_tiles * TILE_SIZE, 0, 0)
-	number_tiles += 1
+	var new_tile = TILE_SCENE.instantiate()
+	new_tile.position = Vector3(0, 0, number_tiles * TILE_SIZE)
 	add_child(new_tile)
 	tiles.append(new_tile)
+	number_tiles += 1
 
 
 func despawn_tile() -> void:

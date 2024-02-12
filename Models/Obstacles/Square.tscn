@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bndv86f5k1a20"]
 
-[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Levels/Obstacles/Obstacle.tscn" id="1_d18e6"]
-[ext_resource type="Script" path="res://Scripts/Square.gd" id="2_33m6w"]
+[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Models/Obstacles/BaseObstacle/Obstacle.tscn" id="1_d18e6"]
+[ext_resource type="Script" path="res://Scripts/Obstacles/Square.gd" id="2_33m6w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tob37"]
 

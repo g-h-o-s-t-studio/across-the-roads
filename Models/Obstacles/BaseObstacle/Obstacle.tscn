@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnps55a4ktvoe"]
 
-[ext_resource type="Script" path="res://Scripts/Obstacle.gd" id="1_qdf6a"]
+[ext_resource type="Script" path="res://Scripts/Obstacles/BaseObstacle/BaseObstacle.gd" id="1_qdf6a"]
 
 [node name="Obstacle" type="Node3D"]
 script = ExtResource("1_qdf6a")
