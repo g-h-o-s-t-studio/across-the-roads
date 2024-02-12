@@ -13,8 +13,18 @@ config_version=5
 config/name="Across-the-roads"
 run/main_scene="res://Levels/Main.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/unsafe_property_access=1
 
 [rendering]
 
 renderer/rendering_method="mobile"
+
+[threading]
+
+worker_pool/warnings/unsafe_property_access=1
+worker_pool/max_fps=60

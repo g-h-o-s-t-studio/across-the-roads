@@ -10,8 +10,6 @@ size = Vector3(20, 2, 50)
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_m808o")
-min_obstacles = null
-max_obstacles = null
 
 [node name="Tile" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

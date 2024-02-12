@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const JUMP_VELOCITY: float = 6.0
+const JUMP_VELOCITY: float = 7.0
 
 var player_speed: float = 7.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -26,7 +26,8 @@ func _physics_process(delta: float) -> void:
 
 
 # FIXME
-func _on_area_body_entered(body):
+func _on_area_body_entered(body) -> void:
 	print(body)
 	if body is Obstacle:
-		print("Obstacle!!!")
+		queue_free()
+		print("--------------Died!----------------")

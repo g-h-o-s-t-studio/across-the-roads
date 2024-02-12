@@ -16,16 +16,18 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if $Player.position.z > tiles[0].position.z + TILE_SIZE / 2:
-		despawn_tile()
-		spawn_tile()
-	
-	if $Player.position.y <= KILL_ZONE:
-		get_tree().reload_current_scene()
+	var player = get_node_or_null("$Player")
+	if player != null:
+		if player.global_position.z > tiles[0].position.z + TILE_SIZE:
+			despawn_tile()
+			spawn_tile()
+
+		if player.global_position.y <= KILL_ZONE:
+			get_tree().reload_current_scene()
 
 
 func spawn_tile() -> void:
-	var new_tile = TILE_SCENE.instantiate()
+	var new_tile = TILE_SCENE.instantiate() # What's type?
 	new_tile.position = Vector3(0, 0, number_tiles * TILE_SIZE)
 	add_child(new_tile)
 	tiles.append(new_tile)
