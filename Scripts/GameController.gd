@@ -1,6 +1,5 @@
 extends Node3D
 
-# TODO: add some mechanics(run on wall, changing lvl axis, etc)
 const KILL_ZONE: int = -50
 const MAP_SIZE: int = 8
 const TILE_SIZE: float = 50
@@ -16,13 +15,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var player = get_node_or_null("$Player")
-	if player != null:
-		if player.global_position.z > tiles[0].position.z + TILE_SIZE:
+		if $Player.position.z >= tiles[0].position.z + TILE_SIZE:
 			despawn_tile()
 			spawn_tile()
 
-		if player.global_position.y <= KILL_ZONE:
+		if $Player.position.y <= KILL_ZONE:
 			get_tree().reload_current_scene()
 
 

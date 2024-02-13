@@ -1,0 +1,1 @@
+class_name Coin extends AnimatableBody3D

@@ -13,13 +13,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	var direction: Vector3 = Vector3(0, 0, 2)
+	var direction: Vector3 = Vector3(0, 0, 1)
 	if Input.is_action_pressed("ui_left"):
 		direction.x += 1
 	if Input.is_action_pressed("ui_right"):
 		direction.x -= 1
 
 	# player_speed += 0.01
+
 	velocity.x = direction.x * player_speed
 	velocity.z = direction.z * player_speed
 	move_and_slide()
@@ -27,7 +28,9 @@ func _physics_process(delta: float) -> void:
 
 # FIXME
 func _on_area_body_entered(body) -> void:
-	print(body)
 	if body is Obstacle:
-		queue_free()
 		print("--------------Died!----------------")
+
+	if body is Coin:
+		body.queue_free()
+

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cec7tspm3fdrq"]
+[gd_scene load_steps=8 format=3 uid="uid://cec7tspm3fdrq"]
 
 [ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Models/Characters/Default/Player.tscn" id="1_nf7dx"]
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_udkti"]
+[ext_resource type="PackedScene" uid="uid://bdvl53otkiq7d" path="res://Models/Items/Coin/Coin.tscn" id="3_b1njp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bd5u8"]
 size = Vector3(20, 0, 50)
@@ -43,3 +44,6 @@ shadow_blur = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rdvni")
+
+[node name="Coin" parent="." instance=ExtResource("3_b1njp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 41.6645)

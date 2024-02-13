@@ -21,7 +21,7 @@ func _ready() -> void:
 	half_z = mesh.size.z / 2
 	
 	for i: int in range(randi_range(min_obstacles, max_obstacles)):
-		var obs = OBSTACLES[randi() % OBSTACLES.size() - 1].instantiate() #? as Obstacle
+		var obs = OBSTACLES[randi() % OBSTACLES.size() - 1].instantiate()
 		obs.position = get_spawn_position()
 		add_child(obs)
 
