@@ -1,9 +1,15 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 const JUMP_VELOCITY: float = 7.0
 
+var coins: int = 0
+var score: int
 var player_speed: float = 7.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+
+func get_current_score() -> int:
+	return int(global_transform.origin.distance_to(Vector3.ZERO))
 
 
 func _physics_process(delta: float) -> void:
@@ -33,4 +39,5 @@ func _on_area_body_entered(body) -> void:
 
 	if body is Coin:
 		body.queue_free()
+
 

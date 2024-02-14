@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Items/Coin.gd" id="1_lttv8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kixds"]
-size = Vector3(4, 4, 0.3)
+size = Vector3(1.2, 1.2, 0.1)
 
 [sub_resource type="Animation" id="Animation_1ira3"]
 resource_name = "Idle"
@@ -31,15 +31,15 @@ _data = {
 }
 
 [node name="Coin" type="AnimatableBody3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.2, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_lttv8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("BoxShape3D_kixds")
 
 [node name="GoldenCoin" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.72703e-10, 0, 0.0753897)
 mesh = ExtResource("1_3nl8x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

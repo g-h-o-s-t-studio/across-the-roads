@@ -8,18 +8,17 @@ size = Vector3(20, 2, 50)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrngd"]
 size = Vector3(20, 2, 50)
 
-[node name="Tile" type="Node3D"]
+[node name="Tile" type="StaticBody3D"]
 script = ExtResource("1_m808o")
-
-[node name="Tile" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Tile"]
-mesh = SubResource("BoxMesh_0rdeq")
-skeleton = NodePath("")
-
-[node name="Collision" type="CollisionShape3D" parent="Tile"]
-shape = SubResource("BoxShape3D_vrngd")
 
 [node name="RayCast" type="RayCast3D" parent="."]
 target_position = Vector3(-60, 0, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_0rdeq")
+skeleton = NodePath("")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_vrngd")

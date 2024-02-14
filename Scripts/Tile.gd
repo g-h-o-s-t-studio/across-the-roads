@@ -1,4 +1,4 @@
-extends Node3D
+extends StaticBody3D
 
 const OBSTACLES: Array[PackedScene] = [
 	preload("res://Models/Obstacles/Cube.tscn"),
@@ -15,7 +15,7 @@ var half_z: float
 
 
 func _ready() -> void:
-	var mesh_inst: MeshInstance3D = $Tile/Mesh
+	var mesh_inst: MeshInstance3D = $Mesh
 	var mesh: BoxMesh = mesh_inst.mesh
 	half_x = mesh.size.x / 2
 	half_z = mesh.size.z / 2
