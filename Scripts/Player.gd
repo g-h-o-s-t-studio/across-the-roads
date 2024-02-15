@@ -1,15 +1,19 @@
 class_name Player extends CharacterBody3D
 
 const JUMP_VELOCITY: float = 7.0
+const START_POSITION: Vector3 = Vector3.ZERO
 
 var coins: int = 0
-var score: int
 var player_speed: float = 7.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
+func _process(_delta: float) -> void:
+	ScoreManager.score = get_current_score()
+
+
 func get_current_score() -> int:
-	return int(global_transform.origin.distance_to(Vector3.ZERO))
+	return int(global_transform.origin.distance_to(START_POSITION))
 
 
 func _physics_process(delta: float) -> void:

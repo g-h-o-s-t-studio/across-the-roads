@@ -3,13 +3,10 @@ class_name Obstacle extends StaticBody3D
 const MAX_X: int = 30
 
 @onready var is_moving_right: bool = randi() % 2
-@onready var speed: float = randf_range(10, 25)
+@onready var speed: float = randf_range(10, 25) if is_moving_right else -randf_range(10, 25)
 
 
 func _ready() -> void:
-	if not is_moving_right:
-		speed = -speed
-
 	change_axis()
 	resize()
 
