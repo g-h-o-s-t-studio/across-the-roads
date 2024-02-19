@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Tile.gd" id="1_m808o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0rdeq"]
-size = Vector3(20, 2, 50)
+size = Vector3(32, 2, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrngd"]
-size = Vector3(20, 2, 50)
+size = Vector3(32, 2, 64)
 
 [node name="Tile" type="StaticBody3D"]
 script = ExtResource("1_m808o")

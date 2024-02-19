@@ -4,7 +4,8 @@ const JUMP_VELOCITY: float = 7.0
 const START_POSITION: Vector3 = Vector3.ZERO
 
 var coins: int = 0
-var player_speed: float = 7.0
+var player_speed: float = 12.0
+var player_speed_horizontally: float = 20.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
@@ -30,8 +31,8 @@ func _physics_process(delta: float) -> void:
 		direction.x -= 1
 
 	# player_speed += 0.01
-
-	velocity.x = direction.x * player_speed
+	direction = direction.normalized()
+	velocity.x = direction.x * player_speed_horizontally
 	velocity.z = direction.z * player_speed
 	
 	move_and_slide()

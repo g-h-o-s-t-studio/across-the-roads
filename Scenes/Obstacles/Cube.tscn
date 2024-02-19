@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bndv86f5k1a20"]
 
-[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Models/Obstacles/BaseObstacle/Obstacle.tscn" id="1_u31i5"]
+[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Scenes/Obstacles/BaseObstacle/Obstacle.tscn" id="1_u31i5"]
 [ext_resource type="Script" path="res://Scripts/Obstacles/Cube.gd" id="2_ohbpm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qyet8"]

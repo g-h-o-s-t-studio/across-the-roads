@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cec7tspm3fdrq"]
+[gd_scene load_steps=7 format=3 uid="uid://cec7tspm3fdrq"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_u6rdq"]
-[ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Models/Characters/Default/Player.tscn" id="2_lg75g"]
+[ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://Scenes/Characters/Default/Player.tscn" id="2_lg75g"]
 [ext_resource type="PackedScene" uid="uid://bq5f18ia6u7ff" path="res://Scenes/UserInterface/GameUI.tscn" id="3_cacb5"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bd5u8"]
-size = Vector3(20, 0, 50)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qpdtu"]
 sky_top_color = Color(0.384314, 0.466667, 0.47451, 1)
@@ -31,11 +28,6 @@ fog_aerial_perspective = 0.8
 script = ExtResource("1_u6rdq")
 
 [node name="Player" parent="." instance=ExtResource("2_lg75g")]
-
-[node name="Ground" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_bd5u8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, -0.663414, 0.55667, 0, 0.642788, 0.766044, -0.866025, 0.383022, -0.321394, 0, 5, 0)
