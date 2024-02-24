@@ -3,8 +3,8 @@ extends Node
 
 const SAVE_PATH: String = "user://save_game.dat"
 
-@onready var score: int = 0: set = _set_score, get = _get_score
-@onready var coins: int = 0: set = _set_coins, get = _get_coins
+var score: int = 0: set = _set_score, get = _get_score
+var coins: int = 0: set = _set_coins, get = _get_coins
 
 
 func _set_score(value: int) -> void:

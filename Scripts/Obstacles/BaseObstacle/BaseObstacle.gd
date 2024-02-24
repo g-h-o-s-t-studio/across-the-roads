@@ -1,9 +1,9 @@
-class_name Obstacle extends StaticBody3D
+class_name BaseObstacle extends StaticBody3D
 
 const MAX_X: int = 30
 
-@onready var is_moving_right: bool = randi() % 2
-@onready var speed: float = randf_range(10, 25) if is_moving_right else -randf_range(10, 25)
+var is_moving_right: bool = randi() % 2
+var speed: float = randf_range(10, 25) if is_moving_right else -randf_range(10, 25)
 
 
 func _ready() -> void:
@@ -21,7 +21,8 @@ func change_direction() -> void:
 
 
 func change_axis() -> void:
-	rotation.y = deg_to_rad(90 if randi() % 2 else 0)
+	if randi() % 2:
+		rotation.y = deg_to_rad(90)
 
 
 func _process(delta: float) -> void:

@@ -3,7 +3,6 @@ class_name Player extends CharacterBody3D
 const JUMP_VELOCITY: float = 7.0
 const START_POSITION: Vector3 = Vector3.ZERO
 
-var coins: int = 0
 var player_speed: float = 12.0
 var player_speed_horizontally: float = 20.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -40,10 +39,16 @@ func _physics_process(delta: float) -> void:
 
 # FIXME
 func _on_area_body_entered(body) -> void:
-	if body is Obstacle:
-		print("--------------Died!----------------")
+	if body is BaseObstacle:
+		print("died")
+	#if body is Coin:
+		#body.queue_free()
 
-	if body is Coin:
-		body.queue_free()
 
-
+func _on_area_area_entered(area):
+	var coin = area.get_parent()
+	if coin is Coin:
+		coin.queue_free()
+	#print(area.get_parent().get_parent())
+	#if area is Coin:
+		#area.get_parent().queue_free()

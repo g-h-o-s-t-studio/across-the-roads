@@ -1,21 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://qnohgq5kqnu1"]
+[gd_scene load_steps=4 format=3 uid="uid://qnohgq5kqnu1"]
 
-[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Scenes/Obstacles/BaseObstacle/Obstacle.tscn" id="1_jmt25"]
 [ext_resource type="Script" path="res://Scripts/Obstacles/Parallelepiped.gd" id="2_hi2nk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwiqh"]
-size = Vector3(3, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mvsy1"]
-size = Vector3(3, 1, 1)
 
-[node name="Obstacle" instance=ExtResource("1_jmt25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Parallelepiped" type="StaticBody3D"]
 script = ExtResource("2_hi2nk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cwiqh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_mvsy1")
 skeleton = NodePath("")

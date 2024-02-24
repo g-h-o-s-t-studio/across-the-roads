@@ -1,6 +1,6 @@
-class_name CubeObstacle extends Obstacle
+class_name CubeObstacle extends BaseObstacle
 
 
 func resize() -> void:
-	var new_size: float = randf_range(0.7, 3.5)
+	var new_size: float = randf_range(0.7, 3)
 	scale = Vector3(new_size, new_size, new_size)

@@ -1,21 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqk0l00omse3o"]
+[gd_scene load_steps=4 format=3 uid="uid://cqk0l00omse3o"]
 
-[ext_resource type="PackedScene" uid="uid://cnps55a4ktvoe" path="res://Scenes/Obstacles/BaseObstacle/Obstacle.tscn" id="1_j62je"]
 [ext_resource type="Script" path="res://Scripts/Obstacles/Wall.gd" id="2_4h7ee"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v4e64"]
-size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2f0jt"]
-size = Vector3(4, 1, 1)
 
-[node name="Obstacle" instance=ExtResource("1_j62je")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Wall" type="StaticBody3D"]
 script = ExtResource("2_4h7ee")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_v4e64")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_2f0jt")
 skeleton = NodePath("")
