@@ -1,6 +1,11 @@
 extends StaticBody3D
 
-var scale_z: float = randf_range(20, 70)
+var size_z: float = randf_range(20, 70)
+
 
 func _ready() -> void:
-	scale = Vector3(1, 1, scale_z)
+	scale.z = size_z
+
+
+func get_size() -> Vector3:
+	return $Mesh.mesh.size

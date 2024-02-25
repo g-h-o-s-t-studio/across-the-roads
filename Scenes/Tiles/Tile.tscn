@@ -12,7 +12,7 @@ size = Vector3(32, 2, 64)
 script = ExtResource("1_m808o")
 
 [node name="RayCast" type="RayCast3D" parent="."]
-target_position = Vector3(-60, 0, 0)
+target_position = Vector3(-100, 0, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
