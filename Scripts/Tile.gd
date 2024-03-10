@@ -45,14 +45,15 @@ func spawn_coins() -> void:
 # +- половина + 14
 # TODO! добавить коллизию для трианглов
 func spawn_triangles_and_platform() -> void:
+	#src.rotate_y(deg_to_rad(90))
+	
 	var te = TRIANGLE.instantiate()
 	var te_size: Vector3 = te.get_size()
 	te.position = Vector3(
 		randf_range(-half_x + te_size.x / 2, half_x - te_size.x / 2), 
-		0, 
+		0,
 		randf_range(-half_z, half_z)
 	)
-	#rc.rotate_y(deg_to_rad(90))
 	add_child(te)
 	
 	
