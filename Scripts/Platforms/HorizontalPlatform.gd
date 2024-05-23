@@ -8,4 +8,4 @@ func _ready() -> void:
 
 
 func get_size() -> Vector3:
-	return $Mesh.mesh.size
+	return (($Mesh as MeshInstance3D).mesh as BoxMesh).size

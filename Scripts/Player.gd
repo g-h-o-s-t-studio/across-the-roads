@@ -1,7 +1,6 @@
 class_name Player extends CharacterBody3D
 
 const JUMP_VELOCITY: float = 7.0
-const START_POSITION: Vector3 = Vector3.ZERO
 
 var player_speed: float = 12.0
 var player_speed_horizontally: float = 20.0
@@ -9,11 +8,8 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _process(_delta: float) -> void:
-	ScoreManager.score = get_current_score()
-
-
-func get_current_score() -> int:
-	return int(global_transform.origin.distance_to(START_POSITION))
+	# get current score
+	ScoreManager.score = int(global_transform.origin.distance_to(Vector3.ZERO))
 
 
 func _physics_process(delta: float) -> void:
@@ -37,6 +33,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+#func make_transparent_if_close(node: Node3D, distance_threshold: float):
+	#var distance = (node.global_transform.origin - get_viewport().get_camera().global_transform.origin).length()
+	#if distance < distance_threshold:
+		#var material = node.get_surface_material(0) as StandardMaterial3D
+		#material.albedo_color.a = 0.5
+	#else:
+		#var material = node.get_surface_material(0) as StandardMaterial3D
+		#material.albedo_color.a = 1.0
+
+
 # FIXME
 func _on_area_body_entered(body) -> void:
 	if body is BaseObstacle:
@@ -46,9 +52,9 @@ func _on_area_body_entered(body) -> void:
 
 
 func _on_area_area_entered(area):
-	var coin = area.get_parent()
-	if coin is Coin:
-		coin.queue_free()
+	var any_area = area.get_parent()
+	if any_area is Coin:
+		any_area.queue_free()
 	#print(area.get_parent().get_parent())
 	#if area is Coin:
 		#area.get_parent().queue_free()

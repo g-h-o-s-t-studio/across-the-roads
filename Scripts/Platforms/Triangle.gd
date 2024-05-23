@@ -2,7 +2,7 @@ extends StaticBody3D
 
 
 func get_size() -> Vector3:
-	return $Mesh.mesh.size
+	return (($Mesh as MeshInstance3D).mesh as PrismMesh).size
 
 
 func rotate180() -> void:

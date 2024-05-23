@@ -7,7 +7,9 @@ const OBSTACLES: Array[PackedScene] = [
 	preload("res://Scenes/Obstacles/Wall.tscn"),
 ]
 const TRIANGLE: PackedScene = preload("res://Scenes/Platforms/Triangle.tscn")
-const PLATFORM: PackedScene = preload("res://Scenes/Platforms/HorizontalPlatform.tscn")
+const PLATFORM: PackedScene = preload(
+	"res://Scenes/Platforms/HorizontalPlatform.tscn"
+)
 const MIN_OBS: int = 20
 const MAX_OBS: int = 35
 
