@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bndv86f5k1a20"]
+
+[ext_resource type="Script" path="res://scripts/obstacles/cube.gd" id="2_ohbpm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qyet8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2lore"]
+
+[node name="Cube" type="StaticBody3D"]
+script = ExtResource("2_ohbpm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qyet8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2lore")
+skeleton = NodePath("")

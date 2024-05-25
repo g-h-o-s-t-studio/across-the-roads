@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://qnohgq5kqnu1"]
+
+[ext_resource type="Script" path="res://scripts/obstacles/parallelepiped.gd" id="2_hi2nk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cwiqh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvsy1"]
+
+[node name="Parallelepiped" type="StaticBody3D"]
+script = ExtResource("2_hi2nk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cwiqh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mvsy1")
+skeleton = NodePath("")
