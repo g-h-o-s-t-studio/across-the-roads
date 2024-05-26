@@ -1,4 +1,7 @@
-extends StaticBody3D
+class_name Tile extends StaticBody3D
+
+@export var min_obs := 20
+@export var max_obs := 35
 
 const CoinScene = preload("res://scenes/items/coin/coin.tscn")
 const ObstaclesScenes: Array[PackedScene] = [
@@ -8,9 +11,6 @@ const ObstaclesScenes: Array[PackedScene] = [
 ]
 const TriangleScene = preload("res://scenes/platforms/triangle.tscn")
 const PlatformScene = preload("res://scenes/platforms/horizontal_platform.tscn")
-
-const MIN_OBS = 20
-const MAX_OBS = 35
 
 var _max_x: float
 var _half_x: float
@@ -72,22 +72,18 @@ func spawn_triangles_and_platform() -> void:
 	add_child(te)
 
 	if randi() % 2:
-		var counter := randi_range(0, 2) * 2 + 3
-		while counter:
+		for i: int in randi_range(0, 2) * 2 + 3:
 			var coin := CoinScene.instantiate() as Coin
-			coin.position =  pm.position + Vector3(0, pm_half_y, counter * 2)
+			coin.position =  pm.position + Vector3(0, pm_half_y, i * 2)
 			add_child(coin)
-			counter -= 1
 
 
 func spawn_obstacles() -> void:
-	var amount_obs := randi_range(MIN_OBS, MAX_OBS)
-	while amount_obs:
+	for i: int in randi_range(min_obs, max_obs):
 		check_pos_and_spawn(
 			ObstaclesScenes[randi() % ObstaclesScenes.size() - 1]
 			.instantiate() as BaseObstacle
 		)
-		amount_obs -= 1
 
 
 func check_pos_and_spawn(obs: BaseObstacle) -> void:
@@ -100,5 +96,5 @@ func check_pos_and_spawn(obs: BaseObstacle) -> void:
 		if not rc.is_colliding():
 			obs.position = Vector3(randf_range(-_half_x, _half_x), y, z)
 			return add_child(obs)
-
+	
 	obs.free()
