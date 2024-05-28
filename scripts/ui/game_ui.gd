@@ -1,6 +1,6 @@
 extends Control
 
-const PauseMenu = preload("res://scenes/user_interface/pause_menu.tscn")
+const PauseMenu = preload("res://scenes/ui/pause_menu.tscn")
 
 @onready var _score := $Score as Label
 

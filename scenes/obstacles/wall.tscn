@@ -1,17 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqk0l00omse3o"]
+[gd_scene load_steps=4 format=3 uid="uid://bnfkov71c0cm0"]
 
-[ext_resource type="Script" path="res://scripts/obstacles/wall.gd" id="2_4h7ee"]
+[ext_resource type="Script" path="res://scripts/obstacles/wall.gd" id="1_qud6e"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v4e64"]
+[sub_resource type="BoxMesh" id="BoxMesh_d3kts"]
+size = Vector3(6, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_2f0jt"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ufvr"]
+size = Vector3(6, 1, 1)
 
 [node name="Wall" type="StaticBody3D"]
-script = ExtResource("2_4h7ee")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_v4e64")
+script = ExtResource("1_qud6e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_2f0jt")
-skeleton = NodePath("")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_d3kts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2ufvr")

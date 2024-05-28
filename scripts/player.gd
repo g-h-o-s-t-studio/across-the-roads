@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 	# get current score
 	# FIXME: поменять чтобы считало только по оси z!!!
 	ScoreManager.score = int(global_transform.origin.z)
-	speed += 0.0001
+	speed += 0.000223
 
 
 func _physics_process(delta: float) -> void:

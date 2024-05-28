@@ -1,68 +1,53 @@
 class_name Tile extends StaticBody3D
 
-@export var min_obs := 20
-@export var max_obs := 35
-
 const CoinScene = preload("res://scenes/items/coin/coin.tscn")
-const ObstaclesScenes: Array[PackedScene] = [
-	preload("res://scenes/obstacles/cube.tscn"),
-	preload("res://scenes/obstacles/parallelepiped.tscn"),
-	preload("res://scenes/obstacles/wall.tscn"),
-]
+const WallScene = preload("res://scenes/obstacles/wall.tscn")
+const MovingCubeScene = preload("res://scenes/obstacles/cube.tscn")
 const TriangleScene = preload("res://scenes/platforms/triangle.tscn")
 const PlatformScene = preload("res://scenes/platforms/horizontal_platform.tscn")
-
-var _max_x: float
-var _half_x: float
-var _half_z: float
+# WARNING: if mesh size is changed, change this values too
+const MESH_SIZE = Vector3(32.0, 2.0, 64.0)
+const _HALF_X := MESH_SIZE.x / 2
+const _HALF_Z := MESH_SIZE.z / 2
 
 @onready var rc := $RayCast as RayCast3D
 
 
 func _ready() -> void:
-	get_mesh_sizes()
 	spawn_triangles_and_platform()
+	spawn_staic_obstacles()
+	spawn_moving_obstacles()
 	spawn_coins()
-	spawn_obstacles()
 	rc.free()
 
 
-func get_mesh_sizes() -> void:
-	var size := (($Mesh as MeshInstance3D).mesh as BoxMesh).size
-	_max_x = size.x
-	_half_x = size.x / 2
-	_half_z = size.z / 2
-
+func spawn_staic_obstacles() -> void:
+	pass
 
 # TODO: реализовать полноценный спавн монеток
 func spawn_coins() -> void:
-	var amount_coins := randi_range(0, 2) * 2 + 3
+	pass
+	#var amount_coins := randi_range(0, 2) * 2 + 3
 	#for i: int in range(amount_coins):
 		#var coin = COIN.instantiate()
 		#coin.position = pm.position + Vector3(0, pm_half_y, i * 2)
 		#add_child(coin)
 
-# TODO: чекать спавн и если нет уже ниче там, спавним
-# +- половина + 14
-# TODO! добавить коллизию для трианглов
+# FIXME
 func spawn_triangles_and_platform() -> void:
-	#src.rotate_y(deg_to_rad(90))
 	var te := TriangleScene.instantiate() as Triangle
-	var te_size := te.get_size()
 	te.position = Vector3(
-		randf_range(-_half_x + te_size.x / 2, _half_x - te_size.x / 2), 
+		randf_range(-_HALF_X + te.size.x / 2, _HALF_X - te.size.x / 2), 
 		0,
-		randf_range(-_half_z, _half_z)
+		randf_range(-_HALF_Z, _HALF_Z)
 	)
 	add_child(te)
 	
 	var pm := PlatformScene.instantiate() as HorizontalPlatform
-	var pm_half_y := (
-		(pm.get_node("Mesh") as MeshInstance3D).mesh as BoxMesh
-	).size.y / 2
-	var pm_half_z := pm.size_z / 2
+	var pm_half_y := pm.size.y / 2
+	var pm_half_z := pm.size.z / 2
 	pm.position = Vector3(
-		te.position.x, te_size.y - pm_half_y, te.position.z + pm_half_z
+		te.position.x, te.size.y - pm_half_y, te.position.z + pm_half_z
 	)
 	add_child(pm)
 	
@@ -78,23 +63,24 @@ func spawn_triangles_and_platform() -> void:
 			add_child(coin)
 
 
-func spawn_obstacles() -> void:
-	for i: int in randi_range(min_obs, max_obs):
-		check_pos_and_spawn(
-			ObstaclesScenes[randi() % ObstaclesScenes.size() - 1]
-			.instantiate() as BaseObstacle
-		)
-
-
-func check_pos_and_spawn(obs: BaseObstacle) -> void:
-	for i: int in range(10):
-		var y := randf_range(0, 13)
-		var z := randf_range(-_half_z, _half_z)
-		rc.position = Vector3(_max_x, y, z)
+func spawn_moving_obstacles() -> void:
+	for i: int in randi_range(10, 20):
+		var is_added := false
+		var obs := (MovingCubeScene.instantiate() as MovingCube)
 		
-		rc.force_raycast_update()
-		if not rc.is_colliding():
-			obs.position = Vector3(randf_range(-_half_x, _half_x), y, z)
-			return add_child(obs)
-	
-	obs.free()
+		for j: int in range(10):
+			var y := randf_range(0, 10)
+			var z := randf_range(-_HALF_Z, _HALF_Z)
+			rc.position = Vector3(MESH_SIZE.x, y, z)
+			
+			rc.force_raycast_update()
+			if rc.is_colliding():
+				continue
+			
+			obs.position = Vector3(randf_range(-_HALF_X, _HALF_X), y, z)
+			add_child(obs)
+			is_added = true
+			break
+		
+		if not is_added:		
+			obs.free()

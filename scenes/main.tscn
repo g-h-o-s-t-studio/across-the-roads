@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_32j80"]
 [ext_resource type="PackedScene" uid="uid://dh1bb3th24xv" path="res://scenes/characters/default/player.tscn" id="2_soayq"]
-[ext_resource type="PackedScene" uid="uid://bq5f18ia6u7ff" path="res://scenes/user_interface/game_ui.tscn" id="3_l0e4e"]
+[ext_resource type="PackedScene" uid="uid://bq5f18ia6u7ff" path="res://scenes/ui/game_ui.tscn" id="3_l0e4e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qpdtu"]
 sky_top_color = Color(0.384314, 0.466667, 0.47451, 1)

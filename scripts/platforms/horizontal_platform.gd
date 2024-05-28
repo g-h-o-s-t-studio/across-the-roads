@@ -1,11 +1,12 @@
 class_name HorizontalPlatform extends StaticBody3D
 
-var size_z := randf_range(20, 70)
+@onready var size := (($Mesh as MeshInstance3D).mesh as BoxMesh).size
 
 
 func _ready() -> void:
-	scale.z = size_z
+	scale.z = _get_rand_scale_z()
 
 
-func get_size() -> Vector3:
-	return (($Mesh as MeshInstance3D).mesh as BoxMesh).size
+func _get_rand_scale_z() -> int:
+	var arr := [20, 30, 40]
+	return arr[randi() % arr.size() - 1]
