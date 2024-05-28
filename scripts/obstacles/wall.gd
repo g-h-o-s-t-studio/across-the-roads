@@ -1,5 +1,7 @@
 class_name StaticWall extends BaseObstacle
 
-
-func _ready() -> void:
-	scale.x = randi_range(1, 5)
+	#match randi() % 5:
+		#0:
+			#scale.x = 8
+		#1:
+			#

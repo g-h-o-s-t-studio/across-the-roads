@@ -7,22 +7,59 @@ const TriangleScene = preload("res://scenes/platforms/triangle.tscn")
 const PlatformScene = preload("res://scenes/platforms/horizontal_platform.tscn")
 # WARNING: if mesh size is changed, change this values too
 const MESH_SIZE = Vector3(32.0, 2.0, 64.0)
-const _HALF_X := MESH_SIZE.x / 2
-const _HALF_Z := MESH_SIZE.z / 2
+const _HALF_X = MESH_SIZE.x / 2
+const _HALF_Z = MESH_SIZE.z / 2
 
 @onready var rc := $RayCast as RayCast3D
 
 
 func _ready() -> void:
-	spawn_triangles_and_platform()
+#	spawn_triangles_and_platform()
 	spawn_staic_obstacles()
 	spawn_moving_obstacles()
 	spawn_coins()
 	rc.free()
 
-
+# TODO: сделать некоторые высокими?
 func spawn_staic_obstacles() -> void:
-	pass
+	for i: int in randi_range(0, 5):
+		var z := randi_range(0, 64)
+		while _is_colliding(Vector3(0, 0, z)):
+			z = randi_range(0, 64)
+		var wall := WallScene.instantiate() as StaticWall
+
+		match randi() % 4:
+			0:
+				wall.scale.x = 8
+				wall.position.z = z
+				add_child(wall)
+			1:
+				wall.scale.x = 1.5
+				wall.position = Vector3(13, 0, z)
+				add_child(wall)
+				
+				wall = WallScene.instantiate() as StaticWall
+				wall.scale.x = 1.5
+				wall.position = Vector3(-13, 0, z)
+				add_child(wall)
+				
+				wall = WallScene.instantiate() as StaticWall
+				wall.scale.x = 1.5
+				wall.position = Vector3(0, 0, z)
+				add_child(wall)
+			2:
+				wall.scale.x = 3
+				wall.position = Vector3(10, 0, z)
+				add_child(wall)
+				
+				wall = WallScene.instantiate() as StaticWall
+				wall.scale.x = 3
+				wall.position = Vector3(-10, 0, z)
+				add_child(wall)
+			_:
+				wall.position = Vector3(randi_range(-14, 14), 0, z)
+				add_child(wall)
+
 
 # TODO: реализовать полноценный спавн монеток
 func spawn_coins() -> void:
@@ -71,12 +108,10 @@ func spawn_moving_obstacles() -> void:
 		for j: int in range(10):
 			var y := randf_range(0, 10)
 			var z := randf_range(-_HALF_Z, _HALF_Z)
-			rc.position = Vector3(MESH_SIZE.x, y, z)
 			
-			rc.force_raycast_update()
-			if rc.is_colliding():
+			if _is_colliding(Vector3(MESH_SIZE.x, y, z)):
 				continue
-			
+				
 			obs.position = Vector3(randf_range(-_HALF_X, _HALF_X), y, z)
 			add_child(obs)
 			is_added = true
@@ -84,3 +119,9 @@ func spawn_moving_obstacles() -> void:
 		
 		if not is_added:		
 			obs.free()
+
+
+func _is_colliding(positon: Vector3) -> bool:
+	rc.position = position
+	rc.force_raycast_update()
+	return rc.is_colliding()
