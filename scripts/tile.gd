@@ -20,46 +20,43 @@ func _ready() -> void:
 	spawn_coins()
 	rc.free()
 
-# TODO: сделать некоторые высокими?
+# TODO: retrying
 func spawn_staic_obstacles() -> void:
-	for i: int in randi_range(0, 5):
+	var last_pos_z: float
+	for i: int in randi_range(1, 5):
+		var retry_amount := 2
 		var z := randi_range(0, 64)
-		while _is_colliding(Vector3(0, 0, z)):
+		while (
+			_is_colliding(Vector3(MESH_SIZE.x, 0, z)) or 
+			absi(z - last_pos_z) < 5
+		):
 			z = randi_range(0, 64)
-		var wall := WallScene.instantiate() as StaticWall
-
+			retry_amount -= 1
+			if not retry_amount:
+				print("retry block")
+				break
+				continue
+			
+		if absi(z - last_pos_z) <= 5:
+			continue
+		
+		last_pos_z = z
+		
+		var scale_y := 2 if randi() % 2 else 1
 		match randi() % 4:
-			0:
-				wall.scale.x = 8
-				wall.position.z = z
-				add_child(wall)
-			1:
-				wall.scale.x = 1.5
-				wall.position = Vector3(13, 0, z)
-				add_child(wall)
-				
-				wall = WallScene.instantiate() as StaticWall
-				wall.scale.x = 1.5
-				wall.position = Vector3(-13, 0, z)
-				add_child(wall)
-				
-				wall = WallScene.instantiate() as StaticWall
-				wall.scale.x = 1.5
-				wall.position = Vector3(0, 0, z)
-				add_child(wall)
-			2:
-				wall.scale.x = 3
-				wall.position = Vector3(10, 0, z)
-				add_child(wall)
-				
-				wall = WallScene.instantiate() as StaticWall
-				wall.scale.x = 3
-				wall.position = Vector3(-10, 0, z)
-				add_child(wall)
-			_:
-				wall.position = Vector3(randi_range(-14, 14), 0, z)
-				add_child(wall)
-
+			0: # wall on full tile width
+				_create_and_add_wall(Vector3(0, 0, z), Vector3(8, 1, 1))
+			1: # 3 wall's
+				_create_and_add_wall(Vector3(13, 0, z), Vector3(1.5, scale_y, 1))
+				_create_and_add_wall(Vector3(-13, 0, z), Vector3(1.5, scale_y, 1))
+				_create_and_add_wall(Vector3(0, 0, z), Vector3(1.5, scale_y, 1))
+			2: # 2 wall's
+				_create_and_add_wall(Vector3(10, 0, z), Vector3(3, scale_y, 1))
+				_create_and_add_wall(Vector3(-10, 0, z), Vector3(3, scale_y, 1))
+			_: # small wall on rand x
+				_create_and_add_wall(Vector3(randi_range(-14, 14), 0, z), Vector3(1, scale_y, 1))
+		
+		retry_amount = 2
 
 # TODO: реализовать полноценный спавн монеток
 func spawn_coins() -> void:
@@ -69,6 +66,7 @@ func spawn_coins() -> void:
 		#var coin = COIN.instantiate()
 		#coin.position = pm.position + Vector3(0, pm_half_y, i * 2)
 		#add_child(coin)
+
 
 # FIXME
 func spawn_triangles_and_platform() -> void:
@@ -119,6 +117,13 @@ func spawn_moving_obstacles() -> void:
 		
 		if not is_added:		
 			obs.free()
+
+
+func _create_and_add_wall(position: Vector3, scale: Vector3) -> void:
+	var wall := WallScene.instantiate() as StaticWall
+	wall.position = position
+	wall.scale = scale
+	add_child(wall)
 
 
 func _is_colliding(positon: Vector3) -> bool:
