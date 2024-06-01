@@ -23,6 +23,5 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	position.x += _speed * delta
-	var pos_x := position.x
-	if absf(pos_x) >= MAX_X:
+	if absf(position.x) >= MAX_X:
 		_speed = -_speed

@@ -12,7 +12,9 @@ size = Vector3(32, 2, 64)
 script = ExtResource("1_cv7u4")
 
 [node name="RayCast" type="RayCast3D" parent="."]
-target_position = Vector3(-100, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+target_position = Vector3(-32, 0, 0)
+collide_with_areas = true
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

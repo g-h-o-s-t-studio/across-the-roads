@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bndv86f5k1a20"]
+[gd_scene load_steps=5 format=3 uid="uid://bndv86f5k1a20"]
 
 [ext_resource type="Script" path="res://scripts/obstacles/cube.gd" id="1_pkbdc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qyet8"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12n0o"]
+albedo_color = Color(1, 0.419608, 0.866667, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_2lore"]
+material = SubResource("StandardMaterial3D_12n0o")
 
 [node name="Cube" type="StaticBody3D"]
 script = ExtResource("1_pkbdc")
