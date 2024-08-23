@@ -12,13 +12,11 @@ func _ready() -> void:
 			var new_size := randf_range(0.7, 3)
 			scale = Vector3(new_size, new_size, new_size)
 		1:
-			scale = Vector3(
-				randf_range(1.3, 6.7), randf_range(1.3, 3.5), randf_range(1.5, 4.5)
-			)
+			scale = Vector3(randf_range(1.3, 6.7), randf_range(1.3, 3.5), 
+				randf_range(1.5, 4.5))
 		_:
-			scale = Vector3(
-				randf_range(3, 10.5), randf_range(2.5, 8.7), randf_range(1, 3.2)
-			)
+			scale = Vector3(randf_range(3, 10.5), randf_range(2.5, 8.7), 
+				randf_range(1, 3.2))
 
 
 func _process(delta: float) -> void:

@@ -14,8 +14,8 @@ var amount_mov_obs := randi_range(8, 18)
 
 @onready var rc := $RayCast as RayCast3D
 @onready var mesh_size := (($Mesh as MeshInstance3D).mesh as BoxMesh).size
-@onready var x := int(mesh_size.x / 2 - 7)
-@onready var z := int(mesh_size.z / 2 - 7)
+@onready var x := int(mesh_size.x / 2 - 3)
+@onready var z := int(mesh_size.z / 2 - 3)
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func spawn_staic_obstacles() -> void:
 	var previous_z := {}
-	for i: int in randi_range(1, 5):
+	for i: int in randi_range(1, 7):
 		var spawn_z := _find_z_for_wall_spawn(previous_z)
 		if spawn_z == -1:
 			continue
@@ -52,25 +52,42 @@ func spawn_staic_obstacles() -> void:
 					Vector3(1, scale_y, 1))
 
 
-# рейкастом проверять, не врезаемся ли мы в объект
 func spawn_coins() -> void:
-	var start_pos := Vector3(randf_range(-x, x), 0, randf_range(-z, z))
-	var angle := -PI / 6 if randi() % 2 else PI / 6  # -45 or 45 degrees
-	var direction := bool(randi() % 2)
-	#if _is_colliding()
-	for i: int in randi_range(0, 2) * 2 + 3:
-		var offset := COINS_DISTANCE * i
-		var new_pos := start_pos + (
-			Vector3(offset * sin(angle), 0, offset * cos(angle))
-			if direction else Vector3(0, 0, offset)
-		)
-		if absi(new_pos.x) > x or absi(new_pos.z) > z:
-			continue
-		
-		var coin := CoinScene.instantiate() as Coin
-		coin.position = new_pos
-		add_child(coin)
+	if not randi() % 4:
+		return
 
+	var amount_coins := randi() % 3 * 2 + 3
+	var dist := COINS_DISTANCE * amount_coins
+	var start_pos := Vector3(randf_range(-x, x), 0, randf_range(-z, z))
+	for i: int in randi() % 3:
+		if randi() % 2:
+			var angle := -PI / 6 if randi() % 2 else PI / 6
+			var sin_angle := sin(angle)
+			var cos_angle := cos(angle)
+			var target_pos := Vector3(dist * sin_angle + MIN_WALLS_DISTANCE, 0, 
+				dist * cos_angle + MIN_WALLS_DISTANCE)
+			
+			while _is_colliding(start_pos, target_pos):
+				start_pos = Vector3(randf_range(-x, x), 0, randf_range(-z, z))
+			
+			while dist:
+				var coin := CoinScene.instantiate() as Coin
+				coin.position = Vector3(dist * sin_angle, 0, dist * cos_angle)
+				add_child(coin)
+				dist -= COINS_DISTANCE
+		else:
+			var target_pos := Vector3(0, 0, dist + MIN_WALLS_DISTANCE)
+			while _is_colliding(start_pos, target_pos):
+				start_pos = Vector3(randf_range(-x, x), 0, randf_range(-z, z))
+		
+			while dist:
+				var coin := CoinScene.instantiate() as Coin
+				coin.position = Vector3(0, 0, dist)
+				add_child(coin)
+				dist -= COINS_DISTANCE
+
+#if absi(new_pos.x) > x or absi(new_pos.z) > z:
+			#continue
 
 # FIXME
 func spawn_triangles_and_platform() -> void:
